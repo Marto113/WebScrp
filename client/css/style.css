@@ -1,4 +1,146 @@
-html {
-    background-color: black;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+}
+
+.top {
+    background-color: #5baaf0;
+    padding: 15px;
+    text-align: left;
+}
+
+.top h1 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 48px;
+}
+
+.center-text {
+    margin: 50px auto;
+    max-width: 600px;
+    text-align: center;
+    font-size: 19px;
+}
+
+.input {
+    display: block;
+    margin: 50px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.input input[type="text"] {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #aaa;
+}
+.input input[type="submit"] {
+    background-color: #5baaf0;
+    color: #333;
+    font-size: 16px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.left-box {
+    width: 825px;
+    max-width: 825px;
+    height: 400px;
+    max-height: 400px;
+    float: left;
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+}
+  
+.right-box {
+    width: 825px;
+    max-width: 825px;
+    height: 400px;
+    max-height: 400px;
+    float: right;
+    border: 1px solid black;
+    padding: 12px;
+    text-align: center; 
+}
+
+.right-box input[type="text"] {
+    width: 30%;
+    padding: 5px 20px;
+    margin: 0px 0px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #aaa;
+}
+.right-box input[type="submit"] {
+    background-color: #5baaf0;
+    color: #333;
+    font-size: 12px;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+#close {
     color: white;
+    position: absolute;
+    top: 92%;
+    left: 37%;
+    transform: translate(-102%, -50%);
+}
+
+#delete-all {
+    position: relative;
+    background-color: #ff6961;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+}
+
+#delete-button {
+    position: relative;
+    background-color: #ff6961;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+}
+
+#close-button {
+    position: relative;
+    background-color: orange;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
 }
