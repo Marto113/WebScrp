@@ -30,9 +30,7 @@ function scrape(domText, url) {
             let newImage = document.createElement("img");
 
             newImage.src = absolutePath;
-
-            console.log(absolutePath);
-            console.log(newImage);
+            newImage.setAttribute("class", "fetched-image");
 
             pictureDiv.appendChild(newImage);
         }
@@ -49,7 +47,7 @@ async function get(route) {
 }
 
 function main() {
-    let urlToScrape = "https://en.wikipedia.org/wiki/Ural_Mountains";
+    let urlToScrape = "https://en.wikipedia.org/wiki/Bulgaria";
     let pageBody = get(`/scrape?siteurl=${urlToScrape}`);
     
     pageBody.then(text => scrape(text, urlToScrape));

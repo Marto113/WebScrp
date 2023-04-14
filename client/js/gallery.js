@@ -1,4 +1,4 @@
-function clicked_img(img, fp) {
+function clickedImg(img, fp) {
     console.log(img.src);
     var top = document.getElementById('top');
     top.src = img.src;
@@ -18,13 +18,13 @@ function clicked_img(img, fp) {
 }
 
 
-function do_close() {
+function doClose() {
     document.getElementById('top').hidden = true;
     document.getElementById('close').hidden = true;
 }
 
-function delete_image(type) {
-    var img_src = document.getElementById("top").getAttribute("src");
-    var filename = img_src.split('/').pop();
+function deleteImage(type) {
+    var imgSrc = document.getElementById("top").getAttribute("src");
+    var filename = imgSrc.split('/').pop();
     window.location.href = type + "/delete/" + filename;
 }

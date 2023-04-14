@@ -2,8 +2,9 @@
 <html>
   <head>
     <title>WebScrp</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script type="text/javascript" src="../gallery.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script type="text/javascript" src="/static/js/gallery.js"></script>
+    <script type="text/javascript" src="/static/js/scrape.js" defer></script>
   </head>
   <body>
     <div class="top">
@@ -27,15 +28,11 @@
             <h2>Photos</h2>
             <div class="photos-container">
                 <div class="overlay"><img src="" id="top" hidden=True>
-                    <span id="close" hidden=True onclick=do_close()>
-                        <button id="close-button" onclick="do_close()">Close Image</button>
+                    <span id="close" hidden=True onclick=doClose()>
+                        <button id="close-button" onclick="doClose()">Close Image</button>
                     </span>
                 </div>
-                <div class="cx">
-                    {% for path in paths %}
-                    <img src='cdn/{{ path }}' height=200 width=300 onclick="clicked_img(this)">
-                    {% endfor %}
-                </div>
+                <div class="cx" id="pics-go-here"></div>
             </div>
         </div>
         <div class="right-box">
