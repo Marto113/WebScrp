@@ -1,4 +1,5 @@
 let pictureDiv = document.getElementById("pics-go-here");
+let textDiv = document.getElementById("text-goes-here");
 
 /**
  * 
@@ -33,6 +34,17 @@ function scrape(domText, url) {
             newImage.setAttribute("class", "fetched-image");
 
             pictureDiv.appendChild(newImage);
+        } else if(elem instanceof HTMLParagraphElement) {
+            if(elem.innerText.trim() == "") {
+                return;
+            }
+
+            let newParagraph = document.createElement("p");
+
+            newParagraph.innerText = elem.innerText.trim().replace(/\[\d+\]/, "");
+            newParagraph.setAttribute("class", "fetched-text");
+
+            textDiv.appendChild(newParagraph);
         }
     });
 }

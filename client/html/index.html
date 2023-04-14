@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <head>
     <title>WebScrp</title>
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
@@ -18,13 +22,12 @@
     <div class="input">
         <form>
             <input type="text" value="Insert a website link" onfocus="if(this.value=='Insert a website link')this.value='';" onblur="if(this.value=='')this.value='Insert a website link';">
-            <br>
             <input type="submit" value="Submit">
         </form>
     </div>
     
     <div class="container">
-        <div class="left-box">
+        <div class="left-box box">
             <h2>Photos</h2>
             <div class="photos-container">
                 <div class="overlay"><img src="" id="top" hidden=True>
@@ -32,13 +35,15 @@
                         <button id="close-button" onclick="doClose()">Close Image</button>
                     </span>
                 </div>
-                <div class="cx" id="pics-go-here"></div>
+                <div class="cx subcontainer" id="pics-go-here"></div>
             </div>
         </div>
-        <div class="right-box">
+        <div class="right-box box">
             <h2>Text search</h2>
             <input type="text" value="Insert a word" onfocus="if(this.value=='Insert a website link')this.value='';" onblur="if(this.value=='')this.value='Insert a website link';">
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit"><br><br>
+
+            <div class="tb subcontainer" id="text-goes-here"></div>
         </div>
     </div>
     </body>
