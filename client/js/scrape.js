@@ -1,5 +1,15 @@
-let pictureDiv = document.getElementById("pics-go-here");
+let photosContainer = document.querySelector('.photos-container');
 let textDiv = document.getElementById("text-goes-here");
+
+/**
+ * 
+ * @param {HTMLElement} domElement 
+ */
+function removeChildren(domElement) {
+    while(domElement.firstChild) {
+        domElement.removeChild(domElement.firstChild);
+    }
+}
 
 /**
  * 
@@ -7,6 +17,10 @@ let textDiv = document.getElementById("text-goes-here");
  * @param {(dom: HTMLElement) => {}} func
  */
 function traverseDOM(dom, func) {
+    if(!dom) {
+        return;
+    }
+
     func(dom);
 
     for(let child of dom.childNodes) {
@@ -16,18 +30,29 @@ function traverseDOM(dom, func) {
 
 /**
  * 
+ * @param {URL} url 
+ */
+function normalizeURL(url) {
+    if(!url.hostname.match(/^(([^.]*)?\.([^.]*)?){2,}$/)) {
+        url.hostname = "www." + url.hostname;
+    }
+
+    return url;
+}
+
+/**
+ * 
  * @param {String} domText 
- * @param {String} url
+ * @param {URL} url
  */
 function scrape(domText, url) {
     let temp = document.createElement("template");
-    let matches = url.match(/^([a-z]{1,5}\:\/\/)(.*\..*\..*?\/)/);
-
+    
     temp.innerHTML = domText;
 
     traverseDOM(temp.content, (elem) => {
         if(elem instanceof HTMLImageElement) {
-            let absolutePath = elem.src.replace(window.location.origin, matches[0]);
+            let absolutePath = elem.src.replace(window.location.origin, url.origin);
             let newImage = document.createElement("img");
 
             newImage.src = absolutePath;
@@ -68,28 +93,17 @@ async function get(route) {
 }
 
 function main() {
-    let urlToScrape = document.getElementById("url-input").value;
-    let pageBody = get(`/scrape?siteurl=${urlToScrape}`);
+    let urlToScrape = new URL(document.getElementById("url-input").value);
+
+    normalizeURL(urlToScrape);
+
+    let pageBody = get(`/scrape?siteurl=${urlToScrape.toString()}`);
+
+    removeChildren(photosContainer);
+    removeChildren(textDiv);
+
     console.log(urlToScrape);
     pageBody.then(text => scrape(text, urlToScrape));
+
     return false;
 }
-
-main();
-
-function filterText() {
-    event.preventDefault();
-  
-    let filterWord = document.getElementById("filter-input").value;
-    let allParagraphs = document.querySelectorAll(".fetched-text");
-  
-    for (let paragraph of allParagraphs) {
-        if (paragraph.innerText.toLowerCase().includes(filterWord.toLowerCase())) {
-            paragraph.style.display = "block";
-        } else {
-            paragraph.style.display = "none";
-        }
-    }
-}
-
-filterText();
