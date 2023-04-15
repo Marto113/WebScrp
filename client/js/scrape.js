@@ -33,7 +33,9 @@ function scrape(domText, url) {
             newImage.src = absolutePath;
             newImage.setAttribute("class", "fetched-image");
 
-            pictureDiv.appendChild(newImage);
+            let photosContainer = document.querySelector('.photos-container');
+            photosContainer.appendChild(newImage);
+            
         } else if(elem instanceof HTMLParagraphElement) {
             if(elem.innerText.trim() == "") {
                 return;
@@ -59,10 +61,11 @@ async function get(route) {
 }
 
 function main() {
-    let urlToScrape = "https://en.wikipedia.org/wiki/Bulgaria";
+    let urlToScrape = document.getElementById("url-input").value;
     let pageBody = get(`/scrape?siteurl=${urlToScrape}`);
-    
+    console.log(urlToScrape);
     pageBody.then(text => scrape(text, urlToScrape));
+    return false;
 }
 
 main();

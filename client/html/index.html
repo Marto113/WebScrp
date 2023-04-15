@@ -20,8 +20,9 @@
     </div>
 
     <div class="input">
-        <form>
-            <input type="text" value="Insert a website link" onfocus="if(this.value=='Insert a website link')this.value='';" onblur="if(this.value=='')this.value='Insert a website link';">
+        <form onsubmit="return main()">
+            <input type="text" id="url-input" value="Insert a website link" onfocus="if(this.value=='Insert a website link')this.value='';" onblur="if(this.value=='')this.value='Insert a website link';">
+            <br>
             <input type="submit" value="Submit">
         </form>
     </div>
@@ -30,12 +31,7 @@
         <div class="left-box box">
             <h2>Photos</h2>
             <div class="photos-container">
-                <div class="overlay"><img src="" id="top" hidden=True>
-                    <span id="close" hidden=True onclick=doClose()>
-                        <button id="close-button" onclick="doClose()">Close Image</button>
-                    </span>
-                </div>
-                <div class="cx subcontainer" id="pics-go-here"></div>
+                
             </div>
         </div>
         <div class="right-box box">

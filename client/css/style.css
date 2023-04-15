@@ -104,6 +104,7 @@ body {
 }
 
 .left-box {
+    overflow-y: scroll;
     width: 825px;
     max-width: 825px;
     height: 500px;
