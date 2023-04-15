@@ -3,6 +3,16 @@ let textDiv = document.getElementById("text-goes-here");
 
 /**
  * 
+ * @param {HTMLElement} domElement 
+ */
+function removeChildren(domElement) {
+    while(domElement.firstChild) {
+        domElement.removeChild(domElement.firstChild);
+    }
+}
+
+/**
+ * 
  * @param {HTMLElement} dom
  * @param {(dom: HTMLElement) => {}} func
  */
@@ -18,30 +28,46 @@ function traverseDOM(dom, func) {
     }
 }
 
+/**
+ * 
+ * @param {URL} url 
+ */
 function normalizeURL(url) {
-    
+    if(!url.hostname.match(/^(([^.]*)?\.([^.]*)?){2,}$/)) {
+        url.hostname = "www." + url.hostname;
+    }
+
+    return url;
 }
 
 /**
  * 
  * @param {String} domText 
- * @param {String} url
+ * @param {URL} url
  */
 function scrape(domText, url) {
     let temp = document.createElement("template");
-    let matches = url.match(/^([a-z]{1,5}\:\/\/)(.*\..*\..*?\/)/);
-
+    
     temp.innerHTML = domText;
 
     traverseDOM(temp.content, (elem) => {
         if(elem instanceof HTMLImageElement) {
-            let absolutePath = elem.src.replace(window.location.origin, matches[0]);
+            let absolutePath = elem.src.replace(window.location.origin, url.origin);
             let newImage = document.createElement("img");
 
             newImage.src = absolutePath;
+            newImage.classList.add("expandable-image");
             newImage.setAttribute("class", "fetched-image");
 
-            photosContainer.appendChild(newImage);            
+            let photosContainer = document.querySelector('.photos-container');
+            photosContainer.appendChild(newImage);
+
+            newImage.addEventListener("click", (event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                event.target.classList.toggle("expanded-image");
+            });
+
         } else if(elem instanceof HTMLParagraphElement) {
             if(elem.innerText.trim() == "") {
                 return;
@@ -67,11 +93,17 @@ async function get(route) {
 }
 
 function main() {
-    let urlToScrape = document.getElementById("url-input").value;
-    let pageBody = get(`/scrape?siteurl=${urlToScrape}`);
+    let urlToScrape = new URL(document.getElementById("url-input").value);
+
+    normalizeURL(urlToScrape);
+
+    let pageBody = get(`/scrape?siteurl=${urlToScrape.toString()}`);
+
+    removeChildren(photosContainer);
+    removeChildren(textDiv);
+
     console.log(urlToScrape);
     pageBody.then(text => scrape(text, urlToScrape));
+
     return false;
 }
-
-main();

@@ -8,8 +8,7 @@ body {
     border-radius: 10px;
     border-width: 2px;
     border-color: black;
-    border-style: dashed;
-
+    border-style: solid;
     width: 225px;
     height: 225px;
     object-fit: contain;
@@ -18,9 +17,8 @@ body {
 .fetched-text {
     border-width: 2px;
     border-color: #333;
-    border-style: dashed;
+    border-style: solid;
     border-radius: 10px;
-
     background-color: #5baaf0;
     color: azure;
     font-family: monospace;
@@ -30,7 +28,6 @@ body {
 .subcontainer {
     background-color: inherit;
     overflow-y: scroll;
-
     max-height: 400px;
     max-width: 800px;
 }
@@ -149,50 +146,12 @@ body {
     box-sizing: border-box;
 }
 
-.overlay {
+.expanded-image {
+    border: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#close {
-    color: white;
-    position: absolute;
-    top: 92%;
-    left: 37%;
-    transform: translate(-102%, -50%);
-}
-
-#delete-all {
-    position: relative;
-    background-color: #ff6961;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-}
-
-#delete-button {
-    position: relative;
-    background-color: #ff6961;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-}
-
-#close-button {
-    position: relative;
-    background-color: orange;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
+    top: 15%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+    cursor: zoom-out;
 }
