@@ -75,7 +75,7 @@ function scrape(domText, url) {
 
             let newParagraph = document.createElement("p");
 
-            newParagraph.innerText = elem.innerText.trim().replace(/\[\d+\]/, "");
+            newParagraph.innerText = elem.innerText.trim().replace(/\[\d+\]/g, "");
             newParagraph.setAttribute("class", "fetched-text");
 
             textDiv.appendChild(newParagraph);
@@ -108,21 +108,25 @@ function main() {
     return false;
 }
 
-main();
-
 function filterText() {
-    event.preventDefault();
-  
     let filterWord = document.getElementById("filter-input").value;
     let allParagraphs = document.querySelectorAll(".fetched-text");
   
+    if(filterWord == "") {
+        allParagraphs.forEach(p => p.style.display = "block");
+        return false;
+    }
+
     for (let paragraph of allParagraphs) {
         if (paragraph.innerText.toLowerCase().includes(filterWord.toLowerCase())) {
+            let searchRegx = new RegExp(filterWord, "ig");
+
+            paragraph.innerHTML = paragraph.innerHTML.replace(searchRegx, `<b style='color:red'>${filterWord}</b>`);
             paragraph.style.display = "block";
         } else {
             paragraph.style.display = "none";
         }
     }
-}
 
-filterText();
+    return false;
+}

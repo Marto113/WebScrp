@@ -6,17 +6,14 @@ import (
 	"io"
 )
 
-const (
-	PORT = 80
-	CHUNK_SIZE = 1024
-)
+const PORT = 80
 
 func handleScrape(w http.ResponseWriter, r *http.Request) {
 	url := r.URL.Query().Get("siteurl")
 	resp, err := http.Get(url)
 
 	if err != nil {
-		fmt.Printf("Something went wrong.\n")
+		fmt.Printf("Something went wrong. URL: %s\n", url)
 		return
 	}
 
