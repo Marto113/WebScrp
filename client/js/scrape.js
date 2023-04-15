@@ -1,4 +1,4 @@
-let pictureDiv = document.getElementById("pics-go-here");
+let photosContainer = document.querySelector('.photos-container');
 let textDiv = document.getElementById("text-goes-here");
 
 /**
@@ -7,11 +7,19 @@ let textDiv = document.getElementById("text-goes-here");
  * @param {(dom: HTMLElement) => {}} func
  */
 function traverseDOM(dom, func) {
+    if(!dom) {
+        return;
+    }
+
     func(dom);
 
     for(let child of dom.childNodes) {
         traverseDOM(child, func);
     }
+}
+
+function normalizeURL(url) {
+    
 }
 
 /**
@@ -33,9 +41,7 @@ function scrape(domText, url) {
             newImage.src = absolutePath;
             newImage.setAttribute("class", "fetched-image");
 
-            let photosContainer = document.querySelector('.photos-container');
-            photosContainer.appendChild(newImage);
-            
+            photosContainer.appendChild(newImage);            
         } else if(elem instanceof HTMLParagraphElement) {
             if(elem.innerText.trim() == "") {
                 return;
