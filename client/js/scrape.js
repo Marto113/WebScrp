@@ -31,11 +31,18 @@ function scrape(domText, url) {
             let newImage = document.createElement("img");
 
             newImage.src = absolutePath;
+            newImage.classList.add("expandable-image");
             newImage.setAttribute("class", "fetched-image");
 
             let photosContainer = document.querySelector('.photos-container');
             photosContainer.appendChild(newImage);
-            
+
+            newImage.addEventListener("click", (event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                event.target.classList.toggle("expanded-image");
+            });
+
         } else if(elem instanceof HTMLParagraphElement) {
             if(elem.innerText.trim() == "") {
                 return;
