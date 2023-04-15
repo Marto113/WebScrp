@@ -36,9 +36,10 @@
         </div>
         <div class="right-box box">
             <h2>Text search</h2>
-            <input type="text" value="Insert a word" onfocus="if(this.value=='Insert a website link')this.value='';" onblur="if(this.value=='')this.value='Insert a website link';">
-            <input type="submit" value="Submit"><br><br>
-
+            <form onsubmit="return filterText()">
+                <input type="text" id="filter-input" value="Insert a word" onfocus="if(this.value=='Insert a website link')this.value='';" onblur="if(this.value=='')this.value='Insert a website link';">
+                <input type="submit" value="Submit">
+            </form>
             <div class="tb subcontainer" id="text-goes-here"></div>
         </div>
     </div>

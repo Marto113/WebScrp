@@ -76,3 +76,20 @@ function main() {
 }
 
 main();
+
+function filterText() {
+    event.preventDefault();
+  
+    let filterWord = document.getElementById("filter-input").value;
+    let allParagraphs = document.querySelectorAll(".fetched-text");
+  
+    for (let paragraph of allParagraphs) {
+        if (paragraph.innerText.toLowerCase().includes(filterWord.toLowerCase())) {
+            paragraph.style.display = "block";
+        } else {
+            paragraph.style.display = "none";
+        }
+    }
+}
+
+filterText();
